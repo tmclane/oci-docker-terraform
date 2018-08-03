@@ -13,6 +13,25 @@ Answer 'yes' when requested and wait for it to finish.
 
 Output:
 
+    Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
+
+    Outputs:
+
+    InstanceNames = [
+        zimbraxdev_docker0,
+        zimbraxdev_docker1,
+        zimbraxdev_docker2
+    ]
+    PrivateIPs = [
+        10.0.1.2,
+        10.0.1.3,
+        10.0.1.4
+    ]
+    PublicIPs = [
+        129.146.130.218,
+        129.146.8.177,
+        129.146.40.205
+    ]
 
 
 ## Docker swarm instructions
