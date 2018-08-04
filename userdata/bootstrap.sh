@@ -14,34 +14,36 @@ chmod 600 $LOGFILE
 
 ${custom_userdata} 2>&1 | tee -a $LOGFILE
 
-#apt update
-#apt upgrade -y
+yum update
+yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine  2>&1 | tee -a $LOGFILE
 
-# iptables -P INPUT ACCEPT
-# iptables -P FORWARD DROP
-# iptables -P OUTPUT ACCEPT
-# iptables -t nat -F
-# iptables -t mangle -F
-iptables -F
-iptables -X
+yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2  2>&1 | tee -a $LOGFILE
 
-# ip6tables -P INPUT ACCEPT
-# ip6tables -P FORWARD DROP
-# ip6tables -P OUTPUT ACCEPT
-# ip6tables -t nat -F
-# ip6tables -t mangle -F
-# ip6tables -F
-# ip6tables -X
+yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo  2>&1 | tee -a $LOGFILE
 
-# Maybe not needed?
-#echo '{"hosts": ["unix:///var/run/docker.sock", "tcp://127.0.0.1:2375"]}'> /etc/docker/daemon.json
-#echo "Updating /lib/systemd/system/docker.service" | tee -a $LOGFILE
-#sed -i -e 's/ExecStart=.*/ExecStart=\/usr\/bin\/dockerd/g'  /lib/systemd/system/docker.service
+yum install docker-ce  2>&1 | tee -a $LOGFILE
 
-#systemctl daemon-reload 2>&1 | tee -a $LOGFILE
+# Update firewall
+firewall-cmd --add-port=2376/tcp --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/udp --permanent  2>&1 | tee -a $LOGFILE
+
+firewall-cmd --reload 2>&1 | tee -a $LOGFILE
+
 
 # Restart to let docker add it's iptable rules
-#systemctl restart docker 2>&1 | tee -a $LOGFILE
+systemctl restart docker 2>&1 | tee -a $LOGFILE
 
 echo true > /opt/zimbra/.firstboot.status
 
