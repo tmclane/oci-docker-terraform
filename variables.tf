@@ -60,6 +60,10 @@ variable "volume_size" {
   description = "Size of the data volume in GBs. (Minimum recommended: 200)."
 }
 
+variable "username" {
+  description = "Username inside the created instance."
+}
+
 locals {
   # Bootstrap script to be executed at init time
   bootstrap_file = "./userdata/bootstrap.sh"

@@ -50,7 +50,7 @@ resource "null_resource" "waiter" {
 
   connection {
     host        = "${oci_core_instance.instance.*.public_ip[count.index]}"
-    user        = "opc"
+    user        = "${username}"
     private_key = "${file(var.ssh_private_key_path)}"
     timeout     = "20m"
   }
