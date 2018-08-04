@@ -53,14 +53,8 @@ resource "oci_core_security_list" "SL" {
   egress_security_rules = [
     {
       destination = "0.0.0.0/0"
-      protocol    = "6"
-
-  # Allow outbound traffic on all ports
-  egress_security_rules = [
-    {
-      destination = "0.0.0.0/0"
       protocol    = "all"
-    },
+    }
   ]
 
   ingress_security_rules = [
