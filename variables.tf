@@ -52,6 +52,10 @@ variable "instance_shape" {
   description = "Size of each instance. (Minimum recommended: VM.Standard1.1)."
 }
 
+variable "image_ocid" {
+  description = "Image OCID to use. Default CentOS7 - Phoenix."
+}
+
 variable "volume_size" {
   description = "Size of the data volume in GBs. (Minimum recommended: 200)."
 }
