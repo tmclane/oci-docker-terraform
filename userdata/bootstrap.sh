@@ -34,6 +34,8 @@ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo  2>&1 | tee -a $LOGFILE
 
+sudo setenforce 0
+
 sudo yum install -y docker-ce 2>&1 | tee -a $LOGFILE
 
 sudo usermod -aG docker opc  | tee -a $LOGFILE
