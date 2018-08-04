@@ -14,34 +14,35 @@ chmod 600 $LOGFILE
 
 ${custom_userdata} 2>&1 | tee -a $LOGFILE
 
+echo "running yum update" 2>&1 | tee -a $LOGFILE
 yum update
 yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
-                  docker-engine  2>&1 | tee -a $LOGFILE
+    docker-client \
+    docker-client-latest \
+    docker-common \
+    docker-latest \
+    docker-latest-logrotate \
+    docker-logrotate \
+    docker-selinux \
+    docker-engine-selinux \
+    docker-engine 2>&1 | tee -a $LOGFILE
 
 yum install -y yum-utils \
   device-mapper-persistent-data \
-  lvm2  2>&1 | tee -a $LOGFILE
+  lvm2 2>&1 | tee -a $LOGFILE
 
 yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo  2>&1 | tee -a $LOGFILE
 
-yum install docker-ce  2>&1 | tee -a $LOGFILE
+yum install docker-ce 2>&1 | tee -a $LOGFILE
 
-usermod -aG docker opc
+usermod -aG docker opc  | tee -a $LOGFILE
 
 # Update firewall
-firewall-cmd --add-port=2376/tcp --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/udp --permanent  2>&1 | tee -a $LOGFILE
+#firewall-cmd --add-port=2376/tcp --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/udp --permanent  2>&1 | tee -a $LOGFILE
 
-firewall-cmd --reload 2>&1 | tee -a $LOGFILE
+#firewall-cmd --reload 2>&1 | tee -a $LOGFILE
 
 # Restart to let docker add it's iptable rules
 systemctl restart docker 2>&1 | tee -a $LOGFILE
