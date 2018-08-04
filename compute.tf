@@ -25,10 +25,7 @@ resource "oci_core_instance" "instance" {
 
   source_details {
     source_type = "image"
-#    source_id   = "ocid1.image.oc1.phx.aaaaaaaavci2f7em7qohubhew25fk4fxa43u6z2a7ixsbtxkmgl7tcvv4sfa"
-    # CentOS 7 - Phoenix
-    source_id = "ocid1.image.oc1.phx.aaaaaaaapnnv2phiyw7apcgtg6kmn572b2mux56ll6j6mck5xti3aw4bnwrq"
-
+    source_id = "${var.image_ocid}"  # defined in 'terraform.tfvars'
   }
 
   create_vnic_details {

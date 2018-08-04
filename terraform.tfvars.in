@@ -13,6 +13,10 @@ region = "us-phoenix-1"
 ### Compartment
 compartment_ocid = ""
 
+### Image OCID
+# CentOS 7 - Phoenix region
+image_ocid = "ocid1.image.oc1.phx.aaaaaaaapnnv2phiyw7apcgtg6kmn572b2mux56ll6j6mck5xti3aw4bnwrq"
+
 ### Public/private keys used on the instances
 ssh_public_key_path = "~/.ssh/id_rsa.pub"
 
