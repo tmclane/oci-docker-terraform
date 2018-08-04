@@ -15,17 +15,16 @@ chmod 600 $LOGFILE
 ${custom_userdata} 2>&1 | tee -a $LOGFILE
 
 echo "running yum update" 2>&1 | tee -a $LOGFILE
-sudo yum update
-sudo yum remove docker \
-    docker-client \
-    docker-client-latest \
-    docker-common \
-    docker-latest \
-    docker-latest-logrotate \
-    docker-logrotate \
-    docker-selinux \
-    docker-engine-selinux \
-    docker-engine 2>&1 | tee -a $LOGFILE
+# sudo yum remove docker \
+#     docker-client \
+#     docker-client-latest \
+#     docker-common \
+#     docker-latest \
+#     docker-latest-logrotate \
+#     docker-logrotate \
+#     docker-selinux \
+#     docker-engine-selinux \
+#     docker-engine 2>&1 | tee -a $LOGFILE
 
 sudo yum install -y yum-utils \
   device-mapper-persistent-data \
