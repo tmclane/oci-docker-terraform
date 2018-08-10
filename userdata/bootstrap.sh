@@ -53,6 +53,8 @@ sudo firewall-cmd --reload 2>&1 | tee -a $LOGFILE
 # Restart to let docker add it's iptable rules
 sudo systemctl start docker 2>&1 | tee -a $LOGFILE
 
+sudo ethtool -k ens3 tx off
+
 echo true > /opt/zimbra/.firstboot.status
 
 if [ "$(cat $STATUSFILE)" = "true" ] ; then
